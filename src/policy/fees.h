@@ -137,17 +137,17 @@ struct FeeCalculation
 class CBlockPolicyEstimator
 {
 private:
-    /** Track confirm delays up to 12 blocks for short horizon */
-    static constexpr unsigned int SHORT_BLOCK_PERIODS = 12;
+    /** Track confirm delays up to 24 blocks for short horizon */
+    static constexpr unsigned int SHORT_BLOCK_PERIODS = 24;		//btc has 2 hour (12 block), this gives litecoin 1 hour instead.
     static constexpr unsigned int SHORT_SCALE = 1;
-    /** Track confirm delays up to 48 blocks for medium horizon */
-    static constexpr unsigned int MED_BLOCK_PERIODS = 24;
+    /** Track confirm delays up to 96 blocks for medium horizon */
+    static constexpr unsigned int MED_BLOCK_PERIODS = 48;		//btc has 8 hour, this gives litecoin 4 hour.
     static constexpr unsigned int MED_SCALE = 2;
-    /** Track confirm delays up to 1008 blocks for long horizon */
-    static constexpr unsigned int LONG_BLOCK_PERIODS = 42;
+    /** Track confirm delays up to 2016 blocks for long horizon */
+    static constexpr unsigned int LONG_BLOCK_PERIODS = 84;		//twice as many blocks, 3.5 days instead of 7
     static constexpr unsigned int LONG_SCALE = 24;
     /** Historical estimates that are older than this aren't valid */
-    static const unsigned int OLDEST_ESTIMATE_HISTORY = 6 * 1008;
+    static const unsigned int OLDEST_ESTIMATE_HISTORY = 14112; //3.5 weeks instead of 6
 
     /** Decay of .962 is a half-life of 18 blocks or about 3 hours */
     static constexpr double SHORT_DECAY = .962;
